@@ -1,0 +1,20 @@
+{
+    "name": "stiegi/wp-tetris-spa-api",
+    "description": "REST API for Single Page Applications",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sascha Stieglitz",
+            "email": "sascha.stieglitz@web.de"
+        }
+    ],
+  "autoload": {
+    "psr-4": {
+      "Spa\\":"src/"
+    }
+  },
+    "minimum-stability": "alpha",
+    "require": {
+    }
+}
