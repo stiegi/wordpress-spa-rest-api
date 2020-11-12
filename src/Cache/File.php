@@ -30,6 +30,14 @@ class File {
 				'permission_callback' => 'Spa\Settings\Settings::can_manage_options'
 			]
 		);
+
+		register_rest_route( 'spa/v1', '/cache/file/get/(?P<slug>.+)',
+			[
+				'methods'  => 'GET',
+				'callback' => [&$this, 'get'],
+				'permission_callback' => '__return_true'
+			]
+		);
 	}
 
 	public function build()
@@ -39,9 +47,9 @@ class File {
 			mkdir($this->cache_directory);
 		}
 		// delete existing files
-		array_map('unlink', glob($this->cache_directory . '/*.*'));
+		array_map('unlink', glob($this->cache_directory . '/*.json'));
 
-		$this->get_data();
+		$this->write_files();
 		$result = [
 			'count' => $this->files_written,
 			'time' => microtime(true) - $start_time,
@@ -49,13 +57,26 @@ class File {
 			'errors' => $this->errors
 		];
 
-
 		$response = new WP_REST_Response($result);
 		$response->set_status(200);
 		return $response;
 	}
 
-	private function get_data()
+	public function get($request)
+	{
+		$file_names = explode('/', $request->get_params()['slug']);
+		$response_data = [];
+		foreach ($file_names as $file_name) {
+			$file_path = $this->cache_directory . $file_name . '.json';
+			$file = @file_get_contents($file_path);
+			$response_data = array_merge($response_data, $file ? json_decode($file, true) : [ $file_name => null ]);
+		}
+		$response = new WP_REST_Response($response_data);
+		$response->set_status(200);
+		return $response;
+	}
+
+	private function write_files()
 	{
 		global $wpdb;
 		$results = $wpdb->get_results('SELECT ID, post_content, post_name FROM ' . $wpdb->posts .  ' WHERE post_type = "post" OR post_type = "page"');
