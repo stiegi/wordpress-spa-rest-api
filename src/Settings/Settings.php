@@ -30,6 +30,7 @@ class Settings {
 		]);
 		return wp_parse_args($saved, self::$defaults);
 	}
+
 	/**
 	 * Save settings
 	 *
@@ -39,5 +40,14 @@ class Settings {
 	 */
 	public static function save_settings( array  $settings ){
 		update_option( self::$option_key, $settings );
+	}
+
+	/**
+	 * Check request permissions
+	 * @return bool
+	 */
+	public static function can_manage_options()
+	{
+		return current_user_can( 'manage_options' );
 	}
 }

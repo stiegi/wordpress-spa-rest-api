@@ -27,7 +27,7 @@ class File {
 				'methods'         => 'GET',
 				'callback'        => [&$this, 'build'],
 				'args'            => [],
-				'permission_callback' => [&$this, 'can_manage_options']
+				'permission_callback' => 'Spa\Settings\Settings::can_manage_options'
 			]
 		);
 	}
@@ -81,14 +81,5 @@ class File {
 				fclose($fp);
 			}
 		}
-	}
-
-	/**
-	 * Check request permissions
-	 * @return bool
-	 */
-	public function can_manage_options()
-	{
-		return current_user_can( 'manage_options' );
 	}
 }

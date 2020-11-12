@@ -24,7 +24,7 @@ class SettingRoutes {
 						'sanitize_callback' => 'sanitize_text_field'
 					]
 				],
-				'permission_callback' => [&$this, 'can_manage_options']
+				'permission_callback' => 'Spa\Settings\Settings::can_manage_options'
 			]
 		);
 		register_rest_route( 'spa/v1', '/settings',
@@ -32,18 +32,9 @@ class SettingRoutes {
 				'methods'         => 'GET',
 				'callback'        => [&$this, 'get_settings'],
 				'args'            => [],
-				'permission_callback' => [&$this, 'can_manage_options']
+				'permission_callback' => 'Spa\Settings\Settings::can_manage_options'
 			]
 		);
-	}
-
-	/**
-	 * Check request permissions
-	 * @return bool
-	 */
-	public function can_manage_options()
-	{
-		return current_user_can( 'manage_options' );
 	}
 
 	/**
@@ -55,7 +46,7 @@ class SettingRoutes {
 	{
 		$settings = ['settings' => $request->get_body()];
 		Settings::save_settings( $settings );
-		$response = rest_ensure_response( Settings::get_settings());
+		$response = $this->get_settings();
 		$response->set_status(201);
 		return $response;
 	}
