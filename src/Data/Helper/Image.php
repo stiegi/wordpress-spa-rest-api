@@ -4,9 +4,8 @@ namespace Spa\Data\Helper;
 
 class Image {
 
-	public static function get_image_data($all_posts)
+	public static function get_image_data($all_posts, $image_ids = [])
 	{
-		$image_ids = array();
 		foreach ($all_posts as $block_array) {
 			foreach ($block_array as &$block_entry)
 			{

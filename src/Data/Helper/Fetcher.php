@@ -25,12 +25,15 @@ class Fetcher {
 	public static function process_post($post)
 	{
 		$blocks = Blocks::parse_blocks_recursively($post->post_content);
+		$thumbnail = get_post_thumbnail_id($post->ID);
+		$thumbnail_array = $thumbnail === 0 ? [] : [$thumbnail];
 		return [
 			'content' => $blocks,
-			'images' => Image::get_image_data([$blocks]),
+			'images' => Image::get_image_data([$blocks], $thumbnail_array),
 			'categories' => Categories::get_categories($post),
 			'title' => $post->post_title,
-			'excerpt' => $post->post_excerpt
+			'excerpt' => $post->post_excerpt,
+			'thumbnail' => $thumbnail
 		];
 	}
 }
