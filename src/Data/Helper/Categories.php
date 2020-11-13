@@ -3,13 +3,13 @@
 namespace Spa\Data\Helper;
 
 class Categories {
-	public static function get_categories($post_id)
+	public static function get_categories($post)
 	{
-		$categories = get_the_category($post_id);
+		$categories = get_the_category($post->ID);
 		$category_groups = [];
 		$parent_count = 0;
 		foreach ($categories as $key => $category) {
-			if($category->parent === 0) {
+			if($category->parent === 0 || !self::does_post_have_category($post, $category->parent)) {
 				$category_groups[$parent_count] = [];
 				array_push($category_groups[$parent_count], $category);
 				unset($categories[$key]);
@@ -48,5 +48,14 @@ class Categories {
 		if(count($unsorted_categories) > 0) {
 			self::sort_categories_recursively($unsorted_categories, $all_parents);
 		}
+	}
+
+	private static function does_post_have_category($post, $term_id)
+	{
+		$all_term_IDs = [];
+		foreach (get_the_category($post->ID) as $term) {
+			array_push($all_term_IDs, $term->term_id);
+		}
+		return in_array($term_id, $all_term_IDs);
 	}
 }
