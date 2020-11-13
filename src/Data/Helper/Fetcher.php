@@ -33,7 +33,25 @@ class Fetcher {
 			'categories' => Categories::get_categories($post),
 			'title' => $post->post_title,
 			'excerpt' => $post->post_excerpt,
-			'thumbnail' => $thumbnail
+			'thumbnail' => $thumbnail,
+			'meta' => self::get_meta($post)
 		];
+	}
+
+	private static function get_meta($post)
+	{
+		$keys_to_unset = [
+			'_edit_lock',
+			'_thumbnail_id',
+			'_wp_old_slug',
+			'_edit_last'
+		];
+		$meta = get_post_meta($post->ID);
+		foreach ($keys_to_unset as $key) {
+			if(isset($meta[$key])) {
+				unset($meta[$key]);
+			}
+		}
+		return $meta;
 	}
 }

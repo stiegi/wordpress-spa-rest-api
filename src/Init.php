@@ -24,13 +24,7 @@ class Init {
 			new Url(),
 			new File()
 		];
-
 		$this->addEndpoints($instances);
-
-
-
-
-
 	}
 
 	private function addEndpoints($instances) {
