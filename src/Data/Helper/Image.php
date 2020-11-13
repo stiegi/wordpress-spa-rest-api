@@ -9,13 +9,21 @@ class Image {
 		foreach ($all_posts as $block_array) {
 			foreach ($block_array as &$block_entry)
 			{
-				if($block_entry['type'] === 'image') {
-					array_push($image_ids, $block_entry['_']['id']);
-				}
-				elseif ($block_entry['type'] === 'gallery') {
-					foreach ($block_entry['_']['ids'] as $id) {
-						array_push($image_ids, $id);
-					}
+				switch ($block_entry['type']) {
+					case 'image':
+						array_push($image_ids, $block_entry['_']['id']);
+						break;
+					case 'gallery':
+						foreach ($block_entry['_']['ids'] as $id) {
+							array_push($image_ids, $id);
+						}
+						break;
+					case 'media-text':
+						if($block_entry['_']['mediaType'] === 'image') {
+							array_push($image_ids, $block_entry['_']['mediaId']);
+						}
+						break;
+					default: break;
 				}
 			}
 		}
