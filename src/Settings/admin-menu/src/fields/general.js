@@ -1,11 +1,11 @@
 export const General = {
-    excludeImages: {
+    spaIdHelp: {
         type: 'textarea',
         inputValue: '',
-        label: 'Exclude image sizes',
+        label: 'Helptext for SPA ID',
         help: {
-            en: 'Comma separated list of image sizes, that will not be part of the response to make it smaller',
-            de: 'Bildergrößen filtern'
+            en: 'Helptext for SPA ID in block editor',
+            de: 'Hilfetext für SPA ID im Block Editor'
         }
     }
 };

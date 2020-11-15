@@ -26,6 +26,7 @@ class Settings {
 	{
 		$saved = get_option(self::$option_key);
 		self::$defaults['settings'] = wp_json_encode([
+			"General" => ["spaIdHelp" => "Customize this text in SPA settings"],
 			"Cache" => ["activateCache" => true]
 		]);
 		return wp_parse_args($saved, self::$defaults);

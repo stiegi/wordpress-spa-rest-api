@@ -58,7 +58,7 @@ class SettingsMenu {
 	{
 		wp_register_script( $this->slug, $this->assets_url . 'admin-menu/public/build/bundle.js', [] );
 		wp_register_style( $this->slug, $this->assets_url . 'admin-menu/public/build/bundle.css' );
-		wp_localize_script( $this->slug, '_spa', array(
+		wp_localize_script( 'admin-bar', '_spa', array(
 			'strings' => array(
 				'saved' => __( 'Settings Saved', 'text-domain' ),
 				'error' => __( 'Error', 'text-domain' )

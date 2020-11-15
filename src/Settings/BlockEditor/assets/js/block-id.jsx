@@ -30,6 +30,7 @@ const addSpaId = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 
 		const { spaId } = props.attributes;
+		const help = JSON.parse(window._spa.settings.settings).General.spaIdHelp;
 
 		return (
 			<Fragment>
@@ -41,7 +42,7 @@ const addSpaId = createHigherOrderComponent( ( BlockEdit ) => {
 					>
 						<TextControl
 							value={ spaId }
-							help = { 'Set an spaId for the selected block' }
+							help = { help }
 							onChange={ ( newValue ) => {
 								props.setAttributes( {
 									spaId: newValue,
