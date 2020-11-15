@@ -12,8 +12,12 @@
  * @package         Spa_Rest_Api
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 }
-
-new Spa\Init();
+if(!class_exists('Spa')) {
+	new Spa\Init();
+}

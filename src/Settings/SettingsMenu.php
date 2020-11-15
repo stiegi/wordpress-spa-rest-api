@@ -56,8 +56,8 @@ class SettingsMenu {
 	 */
 	public function register_assets()
 	{
-		wp_register_script( $this->slug, $this->assets_url . '/admin-menu/public/build/bundle.js', [] );
-		wp_register_style( $this->slug, $this->assets_url . '/admin-menu/public/build/bundle.css' );
+		wp_register_script( $this->slug, $this->assets_url . 'admin-menu/public/build/bundle.js', [] );
+		wp_register_style( $this->slug, $this->assets_url . 'admin-menu/public/build/bundle.css' );
 		wp_localize_script( $this->slug, '_spa', array(
 			'strings' => array(
 				'saved' => __( 'Settings Saved', 'text-domain' ),
