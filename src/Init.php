@@ -25,6 +25,7 @@ class Init {
 			new File()
 		];
 		$this->addEndpoints($instances);
+		add_action( 'enqueue_block_editor_assets', 'Spa\Settings\BlockEditor\BlockId::add_block_id_field' );
 	}
 
 	private function addEndpoints($instances) {
@@ -32,4 +33,5 @@ class Init {
 			add_action('rest_api_init', [$instance, 'register_routes']);
 		}
 	}
+
 }

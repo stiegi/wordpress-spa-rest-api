@@ -16,3 +16,7 @@ mkdir ./release/src/Settings/admin-menu/public/
 mkdir ./release/src/Settings/admin-menu/public/build
 cp -r ./src/Settings/admin-menu/public/build/*.css ./release/src/Settings/admin-menu/public/build/
 cp -r ./src/Settings/admin-menu/public/build/*.js ./release/src/Settings/admin-menu/public/build/
+mkdir ./release/src/Settings/BlockEditor/
+mkdir ./release/src/Settings/BlockEditor/dist/
+cp ./src/Settings/BlockEditor/*.php ./release/src/Settings/BlockEditor/
+cp ./src/Settings/BlockEditor/dist/enhance-block-editor.js ./release/src/Settings/BlockEditor/dist/enhance-block-editor.js
