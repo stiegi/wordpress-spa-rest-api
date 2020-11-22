@@ -1,7 +1,7 @@
 {
-	"name": "extend-block-example",
+	"name": "enhance-blocks-for-spa",
 	"version": "1.0.0",
-	"description": "Example how to extend an existing Gutenberg block",
+	"description": "Adds SPA ID and checkbox to strip HTML from paragraphs to block editor",
 	"scripts": {
 		"start": "parcel watch --no-hmr assets/js/enhance-block-editor.js -d dist",
 		"build": "parcel build assets/js/enhance-block-editor.js -d dist",

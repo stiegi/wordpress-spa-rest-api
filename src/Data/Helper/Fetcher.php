@@ -17,7 +17,7 @@ class Fetcher {
 		$post_objects = [];
 		$posts = $wpdb->get_results($query);
 		foreach ($posts as $post) {
-			$post_objects[$post->post_name]['post'] = self::process_post($post);
+			$post_objects[$post->post_name] = self::process_post($post);
 		}
 		return $post_objects;
 	}
@@ -28,7 +28,7 @@ class Fetcher {
 		$thumbnail = get_post_thumbnail_id($post->ID);
 		$thumbnail_array = $thumbnail === 0 ? [] : [$thumbnail];
 		return [
-			'content' => $blocks,
+			'blocks' => $blocks,
 			'images' => Image::get_image_data([$blocks], $thumbnail_array),
 			'categories' => Categories::get_categories($post),
 			'title' => $post->post_title,

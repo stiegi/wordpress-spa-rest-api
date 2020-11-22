@@ -30,7 +30,8 @@ class Blocks {
 				}
 			}
 		}
-		return self::parse_types($blocks);
+		$blocks = self::parse_types($blocks);
+		return self::strip_HTML($blocks);
 	}
 
 	private static function parse_types($blocks)
@@ -60,6 +61,16 @@ class Blocks {
 			$data[] = $columns[1];
 		}
 		return $data;
+	}
+
+	private static function strip_HTML($blocks)
+	{
+		foreach ($blocks as &$block) {
+			if(isset($block['_']['stripHTML']) && $block['_']['stripHTML'] && is_string($block['content'])) {
+				$block['content'] = strip_tags($block['content']);
+			}
+		}
+		return $blocks;
 	}
 
 }
