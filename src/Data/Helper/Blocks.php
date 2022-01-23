@@ -12,6 +12,7 @@ class Blocks {
 			foreach($matches[$x] as $key => $match) {
 				switch ($x) {
 					case 1:
+						$blocks[$key]['uniqueId'] = rand();
 						$blocks[$key]['type'] = $match;
 						break;
 					case 2:
